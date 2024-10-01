@@ -1,0 +1,4 @@
+Escrito 3.0
+Escrito 4.0
+Escrito *
+Suma: 7.0
