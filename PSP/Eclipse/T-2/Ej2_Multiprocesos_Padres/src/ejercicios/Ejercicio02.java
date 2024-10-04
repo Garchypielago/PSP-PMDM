@@ -22,7 +22,7 @@ public class Ejercicio02 {
 
 		// Directorio del porceso que quiero llamar
 		File directorio = new File(
-				"E:\\Escritorio\\Git_REPOSITORIOS\\Curso02\\PSP+PMDM\\PSP\\Eclipse\\T-2\\Ej2_Multiprocesos_Hijos\\bin");
+				"E:\\Escritorio\\Git_REPOSITORIOS\\Curso02\\PSP-PMDM\\PSP\\Eclipse\\T-2\\Ej2_Multiprocesos_Hijos\\bin");
 		// Tipo de proceso y archivo (depende del especificdo)
 		ProcessBuilder pb = new ProcessBuilder("java", "ejercicios.Ejercicio02");
 		// Agrego donde esta el programa

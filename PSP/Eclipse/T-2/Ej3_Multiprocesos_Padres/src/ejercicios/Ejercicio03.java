@@ -27,6 +27,7 @@ public class Ejercicio03 {
 		pb.redirectError(fErr);
 
 		Process p = pb.start();
+		
 
 		try {
 			int exitVal = p.waitFor();
