@@ -47,7 +47,7 @@ public class Ejemplo_Raton_HIlos_Ver_Info extends Thread{
 		pinky.start();
 		mickey.start();
 	}
-		
+//		empiezan a la vez y acaban cada uno a su tiempo
 		
 }
 		

@@ -17,8 +17,6 @@ public class Ejercicio02 {
 		// Agrego donde esta el programa
 		pb.directory(directorio);
 
-		pb.directory(directorio);
-
 		File fBat = new File("E:\\Escritorio\\Git_REPOSITORIOS\\Curso02\\PSP+PMDM\\PSP\\Eclipse\\T-2\\Ej3_Multiprocesos_Padres\\TXT\\entrada_ej02.txt");
 		pb.redirectInput(fBat);
 		File fOut = new File("E:\\Escritorio\\Git_REPOSITORIOS\\Curso02\\PSP+PMDM\\PSP\\Eclipse\\T-2\\Ej3_Multiprocesos_Padres\\TXT\\salida_ej02.txt");

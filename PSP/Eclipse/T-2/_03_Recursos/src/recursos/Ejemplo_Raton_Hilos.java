@@ -41,7 +41,7 @@ public class Ejemplo_Raton_Hilos extends Thread{
 		pinky.start();
 		mickey.start();
 	}
-		
+//		empiezan a la vez y terminn cuando deben
 		
 }
 		
