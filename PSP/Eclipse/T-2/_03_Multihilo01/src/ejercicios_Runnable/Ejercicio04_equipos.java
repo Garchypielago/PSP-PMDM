@@ -2,7 +2,7 @@ package ejercicios_Runnable;
 
 import java.util.*;
 
-public class Ejercicio04_equipos extends Thread{
+public class Ejercicio04_equipos implements Runnable {
 	
 	private ArrayList<Ejercicio04_corredores> equipo ;
 	private String nombre;
@@ -18,10 +18,12 @@ public class Ejercicio04_equipos extends Thread{
 	}
 	
 	public void run() {
+		Thread th = new Thread();
 		for (Ejercicio04_corredores c : equipo) {
 			try {
-				c.start();
-				c.join();
+				th = new Thread(c);
+				th.start();
+				th.join();
 			} catch (InterruptedException e) {
 			}
 		}

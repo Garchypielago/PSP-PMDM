@@ -11,10 +11,6 @@ public class Ejercicio04_corredores extends Thread {
 	}
 
 	public void run() {
-		correr();
-	}
-
-	public void correr() {
 		int correr, tiempo;
 		try {
 			System.out.println(equipo + ": " + nombre + " ha empezado a correr");
@@ -29,5 +25,4 @@ public class Ejercicio04_corredores extends Thread {
 			e.printStackTrace();
 		}
 	}
-
 }

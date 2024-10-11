@@ -1,6 +1,6 @@
 package ejercicios_Runnable;
 
-public class Ejercicio04_corredores extends Thread {
+public class Ejercicio04_corredores implements Runnable {
 
 	private String equipo, nombre;
 
@@ -22,7 +22,7 @@ public class Ejercicio04_corredores extends Thread {
 //			System.out.println(correr);
 			tiempo = correr * 10;
 //			System.out.println(tiempo);
-			this.sleep(tiempo);
+			Thread.sleep(tiempo);
 			System.out.println(equipo + ": " + nombre + " ha terminado en - " + (double) tiempo / 1000 + "s.");
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block

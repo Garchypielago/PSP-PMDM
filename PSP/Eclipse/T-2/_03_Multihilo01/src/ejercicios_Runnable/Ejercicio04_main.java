@@ -14,10 +14,8 @@ public class Ejercicio04_main {
 		eeuu.add("Kim");
 		eeuu.add("Mike");
 		
-		españa.start();
-		eeuu.start();
-		
-
+		new Thread(españa).start();
+		new Thread(eeuu).start();
 	}
 
 }

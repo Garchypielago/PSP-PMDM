@@ -40,14 +40,19 @@ public class Ejercicio03 implements Runnable {
 		Ejercicio03 pepe = new Ejercicio03("Pepe");
 		Ejercicio03 juan = new Ejercicio03("Juan");
 		Ejercicio03 vicente = new Ejercicio03("Vicente");
+		
+		Thread th = new Thread();
 
 		try {
-			pepe.start();
-			pepe.join();
-			juan.start();
-			juan.join();
-			vicente.start();
-			vicente.join();
+			th = new Thread(pepe);
+			th.start();
+			th.join();
+			th = new Thread(juan);
+			th.start();
+			th.join();
+			th = new Thread(vicente);
+			th.start();
+			th.join();
 		} catch (InterruptedException e) {
 		}
 
