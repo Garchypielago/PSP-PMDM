@@ -8,16 +8,19 @@ public class Ejercicio05_main {
 		Ejercicio05_artificiero Pepe = new Ejercicio05_artificiero();
 		
 		// todo 
-		new Thread(C4).start();
-		new Thread(Pepe).start();
+		Thread bomba = new Thread(C4);
+		Thread artifi = new Thread(Pepe);
+		
+		artifi.start();
+		bomba.start();
 		
 		do {
-		} while(C4.isAlive() && Pepe.isAlive());
+		} while(bomba.isAlive() && artifi.isAlive());
 		
-		if(C4.isAlive()) {
-			C4.interrupt();
+		if(bomba.isAlive()) {
+			bomba.interrupt();
 		} else {
-			Pepe.interrupt();
+			artifi.interrupt();
 		}
 		
 
