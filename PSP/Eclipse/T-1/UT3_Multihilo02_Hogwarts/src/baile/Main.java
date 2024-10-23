@@ -6,7 +6,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		Bailarin HarryPotter = new Bailarin("Harry Potter", "Gryffindor");
+		Bailarin HarryPotter = new Bailarin("HarryPotter", "Gryffindor");
 		Bailarin DracoMalfoy = new Bailarin("DracoMalfoy", "Slytherin");
 		Bailarin CedricDigory = new Bailarin("CedricDigory", "Hufflepuff");
 		Bailarin TerryBoot = new Bailarin("TerryBoot", "Ravenclaw");
