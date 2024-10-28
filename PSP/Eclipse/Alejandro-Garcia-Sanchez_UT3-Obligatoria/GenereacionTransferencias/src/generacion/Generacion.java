@@ -9,7 +9,6 @@ public class Generacion {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		if (random() < 30) {
-//			System.out.println("no");
 			System.exit(-2);
 		}
 
@@ -18,13 +17,20 @@ public class Generacion {
 //		Scanner sc = new Scanner("prueba_cuentas.txt\n" + "../TXT/\n" + "100\n");
 		String nombre = sc.nextLine(), path = sc.nextLine();
 		int numero = Integer.parseInt(sc.nextLine());
+		
+		Double suma = 0.0, auxiliar;
 
 		List<String> lineas = new ArrayList<>();
         for (int i = 0; i < numero; i++) {
-            lineas.add(generarCuenta() + ";" + generarSueldo());
+        	auxiliar = Double.parseDouble(generarSueldo());
+        	suma += auxiliar;
+            lineas.add(generarCuenta() + ";" + auxiliar);
         }
 
             Files.write(Paths.get(path + nombre), lineas);
+            
+            System.out.println("Importe total transferencias: " + suma);
+            
         } catch (IOException e) {
             e.printStackTrace();
             System.exit(-1);
