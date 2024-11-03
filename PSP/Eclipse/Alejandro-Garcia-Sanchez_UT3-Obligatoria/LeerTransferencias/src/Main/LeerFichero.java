@@ -14,7 +14,7 @@ public class LeerFichero {
 		String nombre = sc_generar.nextLine();
 
 		/*
-		 transacciones.txt
+transacciones.txt
 E:\Escritorio\Git_REPOSITORIOS\Curso02\PSP-PMDM\PSP\Eclipse\Alejandro-Garcia-Sanchez_UT3-Obligatoria\TXT\
 200
 		 
