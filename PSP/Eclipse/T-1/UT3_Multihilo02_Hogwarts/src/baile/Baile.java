@@ -28,7 +28,7 @@ public class Baile{
 		this.contador = 0;
 	}
 
-	public boolean getBailando() {
+	public synchronized boolean getBailando() {
 		return bailando;
 	}
 
@@ -49,20 +49,24 @@ public class Baile{
 
 	
 	public synchronized void liberarPareja(Bailarina bailarina) {
+		if (bailarina.getPareja()!=null) {
 		bailarines.get(bailarines.indexOf(bailarina.getPareja())).setPareja(false);
+		}
+		return;
 	}
 	
 	public synchronized Bailarin cambioPareja(Bailarina bailarina) {
         Bailarin escogido = bailarina.getPareja(); // Obtener la pareja actual
 
         // Mezclar la lista de bailarines
-        Collections.shuffle(bailarines);
+        ArrayList<Bailarin> bailarinesCopy = (ArrayList<Bailarin>) bailarines.clone();
+        Collections.shuffle(bailarinesCopy);
 
-        for (Bailarin bailarin: bailarines) {
+        for (Bailarin bailarin: bailarinesCopy) {
             // Condición para verificar las casas y si el bailarin no tiene pareja
-            if (!((bailarina.getCasa().equals("Gryffindor") && escogido.getCasa().equals("Slytherin"))
-                    || (bailarina.getCasa().equals("Slytherin") && escogido.getCasa().equals("Gryffindor")))
-                    && bailarin.getPareja()==false && bailarina.getPareja() != bailarin) {
+            if (!((bailarina.getCasa().equals("Gryffindor") && bailarin.getCasa().equals("Slytherin"))
+                    || (bailarina.getCasa().equals("Slytherin") && bailarin.getCasa().equals("Gryffindor")))
+                    && bailarin.getPareja()==false && escogido != bailarin) {
 
                 escogido = bailarin; // Cambiar la pareja
 //                bailarin.setPareja(true);
@@ -70,7 +74,9 @@ public class Baile{
             }
         }
 
+        if (escogido!=null) {
         bailarines.get(bailarines.indexOf(escogido)).setPareja(true);
+        }
 
         return escogido; // Retornar el bailarín seleccionado
     }

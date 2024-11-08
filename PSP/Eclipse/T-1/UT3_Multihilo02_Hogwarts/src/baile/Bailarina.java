@@ -34,9 +34,9 @@ public class Bailarina extends Thread {
 			System.out.println(nombre + " bailará con " + pareja.getNombre());
 			
 		while (finCurso.getBailando()) {
-			finCurso.liberarPareja(this);
 
 			this.sleep(10000);
+			finCurso.liberarPareja(this);
 			System.out.println(nombre + " cambiará de pareja");
 			auxiliar = this.pareja;
 			
