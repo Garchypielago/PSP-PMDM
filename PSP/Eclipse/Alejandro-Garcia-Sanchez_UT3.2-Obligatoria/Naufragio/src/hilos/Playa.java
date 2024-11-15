@@ -11,29 +11,42 @@ public class Playa {
 	public Playa(Semaphore miSemaforo) {
 		super();
 		this.miSemaforo = miSemaforo;
-		this.naufragos = new Random().nextInt(1000)+1;
+		this.naufragos = new Random().nextInt(200) + 801;
 	}
-	
+
 	public int getNaufragos() {
 		return naufragos;
 	}
 
-	public void pasar(String nombre) {	
+	public int pasar(String nombre, int llevar) {
+		int llevados = 0;
 		try {
-			
 			this.miSemaforo.acquire();
-			Thread.sleep(3*1000);
-			System.out.println("Paso 2");
-			Thread.sleep(1000);
-			System.out.println("Paso 3");
-			Thread.sleep(1000);
+			
+			if (this.getNaufragos() <= 0) 
+				return llevados;
+			
+			llevados = recoger(llevar);
+			System.out.println("Balsa " + nombre + " ha recogido naufragos, ahora hay: " + this.getNaufragos());
+			Thread.sleep(1500);
+
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println("SOLTANDO semaforo hilo:"+nombre);
-		this.miSemaforo.release();
 		
+		this.miSemaforo.release();
+		return llevados;
+	}
+
+	public synchronized int recoger(int llevar) {
+		if (this.naufragos - llevar < 0) {
+			int resta = this.naufragos;
+			this.naufragos = 0;
+			return resta;
+		}
+		this.naufragos -= llevar;
+		return llevar;
 	}
 
 }
