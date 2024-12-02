@@ -1,0 +1,103 @@
+1 y 2)
+public class PeticionHttpRAE {
+
+    public StringBuilder getContenido(String direccion) throws IOException {
+        StringBuilder respuesta = new StringBuilder();
+
+        URL url = new URL(direccion);
+        HttpURLConnection conexion;
+        conexion = (HttpURLConnection) url.openConnection();
+        conexion.setRequestMethod("GET");
+        conexion.setRequestProperty("Content-Type", "Text/plain");
+        conexion.setRequestProperty("charset", "utf-8");
+        conexion.setRequestProperty("User-Agent", "Chrome");
+
+        int estado = conexion.getResponseCode();
+        Reader streamReader;
+        if (estado == HttpURLConnection.HTTP_OK) {
+            streamReader = new InputStreamReader(conexion.getInputStream());
+            int caracter;
+            while ((caracter = streamReader.read()) != -1) {
+                respuesta.append((char) caracter);
+            }
+        } else {
+            System.out.println("Error HTTP " + estado);
+        }
+
+        return respuesta;
+    }
+
+    public static void escribirFichero(String path, String contenido) {
+        Path mipath = Paths.get(path);
+        byte[] miBytes = contenido.getBytes();
+        try {
+            Files.write(mipath, miBytes);
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+}
+
+
+3)
+public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    System.out.println("¿Qué palabra quieres buscar?");
+    // entrada de una cadena
+    String recurso = sc.nextLine();
+
+    PeticionHttpRAE miPeticion = new PeticionHttpRAE();
+    String url = "https://www.rae.es/drae2001/";
+    String direccion = url + recurso;
+
+    StringBuilder resultado;
+    try {
+        resultado = miPeticion.getContenido(direccion);
+        String ruta = "c:/julio/" + recurso + ".html";
+        miPeticion.escribirFichero(ruta, resultado.toString());
+        System.out.println("descarga finalizada");
+    } catch (IOException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+    }
+}
+
+
+4)
+public class PeticionHttpRAE {
+    public int almacenarPagina(String url, String recurso, String path) throws Exception {
+        String direccion = url + recurso;
+        // Crear el objeto HttpClient, indicando versión del protocolo, así como otros datos opcionales
+        HttpClient myHttp = HttpClient.newBuilder().version(HttpClient.Version.HTTP_1_1)
+                .followRedirects(HttpClient.Redirect.NORMAL).build();
+        // Crear el objeto HttpRequest, indicando la URI y los parámetros de cabecera de la petición
+        HttpRequest myRequest = HttpRequest.newBuilder().GET().uri(URI.create(direccion))
+                .headers("Content-Type", "Text/plain").setHeader("User-Agent", "Chrome").build();
+        // Realizar la petición a través del método send del HttpClient y asignar las respuestas de la petición a un objeto HttpResponse
+        HttpResponse<Path> myResponse = myHttp.send(myRequest, HttpResponse.BodyHandlers.ofFile(Path.of(path)));
+        return myResponse.statusCode();
+    }
+}
+
+
+5)
+public static void main(String[] args) throws Exception {
+    String url = "https://www.rae.es/drae2001/";
+    Scanner sc = new Scanner(System.in);
+
+    System.out.println("¿Qué palabra quieres buscar?");
+    // Entrada de una cadena
+    String recurso = sc.nextLine();
+
+    PeticionHttpRAE miPeticion = new PeticionHttpRAE();
+    String ruta = "c:/julio/" + recurso + ".html";
+    try {
+        Integer resultado = miPeticion.almacenarPagina(url, recurso, ruta);
+        System.out.println("descarga finalizada");
+    } catch (IOException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+    }
+}
+
