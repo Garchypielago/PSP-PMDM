@@ -1,0 +1,15 @@
+alejandro.garcia77@educa.madrid.org
+Prueba con adjunto
+Este es un mensaje con un archivo adjunto.
+f
+si
+prueba.txt
+
+
+alejandro.garcia77@educa.madrid.org
+Prueba sin adjunto
+Este es un mensaje con un archivo adjunto.
+f
+no
+
+
