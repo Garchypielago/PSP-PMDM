@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">PrimerasPruebas</string>
+    <string name="textbutton">Link!!</string>
+    <string-array name="spinner1">
+        <item>España</item>
+        <item>Andorra</item>
+        <item>Grecia</item>
+        <item>Alemania</item>
+    </string-array>
+</resources>
