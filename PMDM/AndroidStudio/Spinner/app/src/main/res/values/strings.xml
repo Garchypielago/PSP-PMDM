@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">Spinner</string>
+    <string-array name="GenericThemes">
+        <item>TVshows</item>
+        <item>Music</item>
+        <item>Anime</item>
+    </string-array>
+
+    <string-array name="SpecificTVshowsThemes">
+        <item>Friends</item>
+        <item>How I met your mother</item>
+        <item>The Big Bang theory</item>
+    </string-array>
+
+    <string-array name="SpecificMusicThemes">
+        <item>IZAL</item>
+        <item>Maná</item>
+        <item>Ciudad Jara</item>
+    </string-array>
+
+    <string-array name="SpecificAnimeThemes">
+        <item>One Piece</item>
+        <item>Solo Leveling</item>
+        <item>Sousou no Frieren</item>
+    </string-array>
+</resources>
