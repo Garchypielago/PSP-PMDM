@@ -8,16 +8,26 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.example.lifecycle.databinding.ActivityMainBinding
 import com.example.lifecycle.model.Datos
 import com.example.lifecycle.viewModel.MainViewModel
+import com.example.lifecycle.viewModel.MainViewModelFlow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     var numClicks = 0
 
-    private val myViewModel: MainViewModel by viewModels()
+//    Sin Flow
+//    private val myViewModel: MainViewModel by viewModels()
+
+//    Con Flow
+    private val myViewModel: MainViewModelFlow by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,13 +62,27 @@ class MainActivity : AppCompatActivity() {
 
         with(binding){
 
-            myViewModel.datos.observe(this@MainActivity){
-                textViewResult.text = it.contador.toString()
-                numClicks = it.numClicks
-                if(it.showMessage){
-                    Toast.makeText(this@MainActivity, "Five clicks", Toast.LENGTH_LONG).show()
+////            Sin Flow
+//            myViewModel.datos.observe(this@MainActivity){
+//                textViewResult.text = it.contador.toString()
+//                numClicks = it.numClicks
+//                if(it.showMessage){
+//                    Toast.makeText(this@MainActivity, "Five clicks", Toast.LENGTH_LONG).show()
+//                }
+//            }
+
+            lifecycleScope.launch {
+                repeatOnLifecycle(Lifecycle.State.STARTED){
+                    myViewModel.datos.collect{
+                        textViewResult.text = it.contador.toString()
+                        numClicks=it.numClicks
+                        if(it.showMessage){
+                            Toast.makeText(this@MainActivity, "Five clicks", Toast.LENGTH_LONG).show()
+                        }
+                    }
                 }
             }
+
 
             buttonAdd.setOnClickListener{
                 myViewModel.add(editTextNumber01.text.toString().toInt(),
