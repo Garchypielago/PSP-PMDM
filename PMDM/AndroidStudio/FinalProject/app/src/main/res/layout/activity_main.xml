@@ -30,35 +30,44 @@ tools:context=".MainActivity">
             android:minHeight="?attr/actionBarSize"
             android:theme="?attr/actionBarTheme" />
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="100dp" />
-
-        <ImageView
-            android:id="@+id/loginImg2"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:src="@drawable/logoblanco" />
-
-        <ImageView
-            android:id="@+id/loginImgShopedex2"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:src="@drawable/shopedexlogo" />
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="30dp" />
-
-        <TextView
-            android:id="@+id/textView"
+        <LinearLayout
+            android:id="@+id/layoutWelcome"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="sans-serif"
-            android:text="Welcome to our shop!!"
-            android:textAlignment="center"
-            android:textSize="24sp"
-            android:textStyle="bold" />
+            android:orientation="vertical">
+
+            <Space
+                android:id="@+id/space01"
+                android:layout_width="match_parent"
+                android:layout_height="100dp" />
+
+            <ImageView
+                android:id="@+id/mainImg"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:src="@drawable/logoblanco" />
+
+            <ImageView
+                android:id="@+id/mainImgShopedex"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:src="@drawable/shopedexlogo" />
+
+            <Space
+                android:id="@+id/space02"
+                android:layout_width="match_parent"
+                android:layout_height="30dp" />
+
+            <TextView
+                android:id="@+id/mainWelcomeTxt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif"
+                android:text="Welcome to our shop!!"
+                android:textAlignment="center"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+        </LinearLayout>
 
     </LinearLayout>
 
@@ -68,7 +77,7 @@ tools:context=".MainActivity">
         android:layout_height="wrap_content"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
-        android:translationY="60dp"
+        android:translationY="100dp"
         app:headerLayout="@layout/header_menu"
         app:menu="@menu/mi_menu" />
 </androidx.drawerlayout.widget.DrawerLayout>

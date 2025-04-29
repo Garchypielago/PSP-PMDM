@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
 
             myIntent.putExtra("Send", findViewById<EditText>(R.id.mySendTxt).text.toString())
 
-            startActivity(myIntent)
+//            startActivity(myIntent)
             myActivityResultLauncher.launch(myIntent)
         }
 

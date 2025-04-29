@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">FinalProject</string>
+    <string name="app_name">Shopedex</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="menu_home">Home Web</string>
@@ -8,4 +8,41 @@
     <string name="user_name">UserName</string>
     <!--  TODO: Remove or change this placeholder text  -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string-array name="type_spinner">
+        <item>Select Type</item>
+        <item>NORMAL</item>
+        <item>FIGHTING</item>
+        <item>FLYING</item>
+        <item>POISON</item>
+        <item>GROUND</item>
+        <item>ROCK</item>
+        <item>BUG</item>
+        <item>GHOST</item>
+        <item>STEEL</item>
+        <item>FIRE</item>
+        <item>WATER</item>
+        <item>GRASS</item>
+        <item>ELECTRIC</item>
+        <item>PSYCHIC</item>
+        <item>ICE</item>
+        <item>DRAGON</item>
+        <item>DARK</item>
+        <item>FAIRY</item>
+    </string-array>
+
+    <string-array name="region_spinner">
+        <item>Select Region</item>
+        <item>KANTO</item>
+        <item>JOHTO</item>
+        <item>HOENN</item>
+        <item>SINNOH</item>
+        <item>TESELIA</item>
+        <item>KALOS</item>
+        <item>ALOLA</item>
+        <item>GALAR</item>
+        <item>PALDEA</item>
+    </string-array>
+
+
 </resources>

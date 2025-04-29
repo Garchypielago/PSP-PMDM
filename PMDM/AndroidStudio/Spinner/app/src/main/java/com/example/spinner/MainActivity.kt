@@ -43,8 +43,8 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         adapterMusic.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         adapterAnime.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
 
-        spinnerGeneric.setOnItemSelectedListener(this)
-        spinnerSpecific.setOnItemSelectedListener(this)
+        spinnerGeneric.onItemSelectedListener = this
+        spinnerSpecific.onItemSelectedListener = this
     }
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
