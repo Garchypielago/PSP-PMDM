@@ -35,11 +35,4 @@ class ProductsViewModel : ViewModel() {
         }
     }
 
-    fun addProductToCart(productId: Long, count: Long){
-        viewModelScope.launch{
-            _data.value = myState.addProductToCart(productId, count)
-
-        }
-    }
-
 }

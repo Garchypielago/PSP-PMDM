@@ -11,7 +11,6 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.Toast
-//import androidx.activity.result.ActivityResultLauncher
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.finalproject.recycler.MyProductAdapter
 import com.example.finalproject.viewModels.ProductsViewModel
@@ -61,7 +60,6 @@ class ProductsFragment : Fragment(), AdapterView.OnItemSelectedListener {
                 putExtra("PRODUCT_PRICE", product.price)
             }
             startActivity(myIntent)
-//            myActivityResultLauncher.launch(myIntent)
         }
         binding.productRecyclerView.adapter = myAdapter
 
@@ -109,7 +107,6 @@ class ProductsFragment : Fragment(), AdapterView.OnItemSelectedListener {
                             putExtra("PRODUCT_PRICE", product.price)
                         }
                         startActivity(myIntent)
-//                        myActivityResultLauncher.launch(myIntent)
                     }
                     productRecyclerView.adapter = myAdapter
                 } else {

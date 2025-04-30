@@ -6,32 +6,34 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.example.finalproject.databinding.ActivityBuyProductBinding
-import com.example.finalproject.viewModels.ProductsViewModel
+import com.example.finalproject.viewModels.CartViewModel
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class BuyProductActivity : AppCompatActivity() {
     private lateinit var binding: ActivityBuyProductBinding
+    private lateinit var coroutine: Job
 
-    private val myProductsViewModel: ProductsViewModel by viewModels()
+
+    private val myCartViewModel: CartViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 
-        // Inflar el binding
         binding = ActivityBuyProductBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Usa binding.main en lugar de findViewById
         ViewCompat.setOnApplyWindowInsetsListener(binding.buymain) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
 
-        // Configuración adicional de tu actividad
         val productId = intent.getIntExtra("PRODUCT_ID", 1).toLong()
         val productName = intent.getStringExtra("PRODUCT_NAME")
         val productImg = intent.getStringExtra("PRODUCT_IMG")
@@ -56,17 +58,22 @@ class BuyProductActivity : AppCompatActivity() {
             }
 
             buyBtn.setOnClickListener{
-                var quant = buyQuantity.text.toString().toLong()
+                val quant = buyQuantity.text.toString().toLong()
 
-                myProductsViewModel.addProductToCart(productId, quant)
 
-                this@BuyProductActivity.finish()
+                coroutine = lifecycleScope.launch {
+                    addTocart(productId, quant)
+                    this@BuyProductActivity.finish()
+                }
+
             }
-
 
         }
 
+    }
 
-
+    private suspend fun addTocart(productId: Long, quant: Long){
+        myCartViewModel.addProductToCart(productId, quant)
+        delay(1000)
     }
 }

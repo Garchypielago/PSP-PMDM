@@ -20,7 +20,11 @@ interface ShopedexAPIService {
     @GET("products/find")
     suspend fun getTypeRegionProducts(@Query("type") type: Long, @Query("region") region: Long): Response<ResponseShopedex>
 
+
+    @GET("cart/")
+    suspend fun getCart(): Response<ResponseCart>
+
     @POST("cart/{productId}/{count}")
-    suspend fun addProductToCart(@Path("productId") productId: Long, @Path("count") count: Long): Response<ResponseShopedex>
+    suspend fun addProductToCart(@Path("productId") productId: Long, @Path("count") count: Long): Response<ResponseCart>
 
 }
