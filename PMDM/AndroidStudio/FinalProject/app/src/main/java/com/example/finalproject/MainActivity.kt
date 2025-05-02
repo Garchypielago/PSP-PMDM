@@ -68,9 +68,9 @@ class MainActivity : AppCompatActivity() {
                 if(it.itemId == R.id.id_web){
                     val myFragmentTransaction: FragmentTransaction = myFragmentManager.beginTransaction()
 //                    val myFragment: WebFragment = WebFragment.newInstance("http://10.0.2.2:8080/contextpath/")
-//                    val myFragment: WebFragment = WebFragment.newInstance("http://192.168.1.189:8080/contextpath/")
+                    val myFragment: WebFragment = WebFragment.newInstance("http://192.168.1.189:8080/contextpath/")
 //                    val myFragment: WebFragment = WebFragment.newInstance("http://192.168.1.46:8080/contextpath/")
-                    val myFragment: WebFragment = WebFragment.newInstance("http://10.227.189.180:8080/contextpath/")
+//                    val myFragment: WebFragment = WebFragment.newInstance("http://10.227.189.180:8080/contextpath/")
                     layoutWelcome.visibility = View.GONE
 
                     myFragmentTransaction
@@ -90,11 +90,9 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 if(it.itemId == R.id.id_cart){
-
-                    Log.v("CartFragment", "Si lo pulso")
-
                     val myFragmentTransaction: FragmentTransaction = myFragmentManager.beginTransaction()
                     val myFragment: CartFragment = CartFragment.newInstance()
+//                    val myFragment: ProductsFragment = ProductsFragment.newInstance()
 
                     layoutWelcome.visibility = View.GONE
 

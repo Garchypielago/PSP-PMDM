@@ -1,6 +1,7 @@
 package com.example.finalproject.recycler
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -23,12 +24,17 @@ class MyCartAdapter(private val dataSet: ResponseCart): RecyclerView.Adapter<MyC
 
     override fun onBindViewHolder(holder: MyCartView, position: Int) {
         val product = dataSet.products[position]
+        Log.d("MyCartAdapter", "Product: $product")
 
         val url: String = product.url
         Glide.with(myContext)
             .load(url)
-            .into(holder.productImg)
+            .into(holder.cartImg)
 
-        holder.productName.text = product.pokemonName
+        holder.cartName.text = product.pokemonName
+        holder.cartQuantity.text = "x${product.productNumber}"
+        holder.cartTotal.text = "${product.totalPrice}P¥"
+        holder.cartPrice.text = "${product.unitPrice}P¥"
+
     }
 }

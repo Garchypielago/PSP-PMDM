@@ -8,6 +8,10 @@ import com.example.finalproject.R
 
 class MyCartView(itemView: View): RecyclerView.ViewHolder(itemView) {
 
-    val productImg = itemView.findViewById<View>(R.id.cartImg) as ImageView
-    val productName = itemView.findViewById<View>(R.id.cartName) as TextView
+    val cartImg = itemView.findViewById<View>(R.id.cartImg) as ImageView
+    val cartName = itemView.findViewById<View>(R.id.cartName) as TextView
+    val cartQuantity = itemView.findViewById<View>(R.id.cartQuantity) as TextView
+    val cartTotal = itemView.findViewById<View>(R.id.cartTotal) as TextView
+    val cartPrice = itemView.findViewById<View>(R.id.cartPrice) as TextView
+
 }

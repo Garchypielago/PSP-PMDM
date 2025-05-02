@@ -41,7 +41,7 @@ class CartFragment : Fragment() {
         binding.cartRecyclerView.adapter = myAdapter
 
         with(binding) {
-            val layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+            val layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
             cartRecyclerView.layoutManager = layoutManager
 
             myCartViewModel.returnCart()
@@ -49,7 +49,11 @@ class CartFragment : Fragment() {
             myCartViewModel.data.observe(viewLifecycleOwner) { response ->
                     myAdapter = MyCartAdapter(response)
                     cartRecyclerView.adapter = myAdapter
+
+                    pokeCartTotal.text = "${response.totalPrice}P¥"
+//                    pokeCartItems.text = "x${response.totalItems}"
             }
+
         }
 
         return myView
