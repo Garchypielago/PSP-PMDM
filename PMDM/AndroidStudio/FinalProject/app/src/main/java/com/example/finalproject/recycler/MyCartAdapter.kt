@@ -1,9 +1,13 @@
 package com.example.finalproject.recycler
 
 import android.content.Context
+import android.content.DialogInterface
+import android.graphics.Color
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.finalproject.R
@@ -12,6 +16,8 @@ import com.example.finalproject.models.ResponseCart
 class MyCartAdapter(private val dataSet: ResponseCart): RecyclerView.Adapter<MyCartView>() {
 
     private lateinit var myContext: Context
+
+    var clickPosition: Int = RecyclerView.NO_POSITION
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyCartView {
         myContext = parent.context
@@ -23,8 +29,13 @@ class MyCartAdapter(private val dataSet: ResponseCart): RecyclerView.Adapter<MyC
     override fun getItemCount() = dataSet.products.size
 
     override fun onBindViewHolder(holder: MyCartView, position: Int) {
+        if(position == clickPosition) {
+            holder.constCart.setBackgroundColor(Color.parseColor("#FCC201"))
+        } else {
+            holder.constCart.setBackgroundColor(Color.TRANSPARENT)
+        }
+
         val product = dataSet.products[position]
-        Log.d("MyCartAdapter", "Product: $product")
 
         val url: String = product.url
         Glide.with(myContext)
@@ -36,5 +47,27 @@ class MyCartAdapter(private val dataSet: ResponseCart): RecyclerView.Adapter<MyC
         holder.cartTotal.text = "${product.totalPrice}P¥"
         holder.cartPrice.text = "${product.unitPrice}P¥"
 
+        holder.constCart.setOnClickListener{
+            notifyItemChanged(clickPosition)
+            clickPosition = position
+            notifyItemChanged(clickPosition)
+            alert(it, product.pokemonName)
+        }
+
+    }
+
+    fun alert(v: View, name: String){
+        var myAlert = AlertDialog.Builder(myContext)
+        myAlert.setTitle("Delete item alert")
+        myAlert.setMessage("Are you sure you want to delete ${name}?")
+        myAlert.setPositiveButton("Yes, I am sure", DialogInterface.OnClickListener({ dialog, which ->
+//TODO borrado de elementos
+        }))
+        myAlert.setNegativeButton("Cancel"){ dialog, which ->
+            notifyItemChanged(clickPosition)
+            clickPosition = -1
+            notifyItemChanged(clickPosition)
+        }
+        myAlert.create().show()
     }
 }

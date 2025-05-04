@@ -13,5 +13,5 @@ class MyCartView(itemView: View): RecyclerView.ViewHolder(itemView) {
     val cartQuantity = itemView.findViewById<View>(R.id.cartQuantity) as TextView
     val cartTotal = itemView.findViewById<View>(R.id.cartTotal) as TextView
     val cartPrice = itemView.findViewById<View>(R.id.cartPrice) as TextView
-
+    val constCart = itemView.findViewById<View>(R.id.constCart) as View
 }
