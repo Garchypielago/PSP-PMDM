@@ -15,5 +15,5 @@ data class ResponseShopedex(
     val sort: Sort = Sort(),
     val first: Boolean = true,
     val numberOfElements: Int = 0,
-    val empty: Boolean = true
+    var empty: Boolean = true
 )

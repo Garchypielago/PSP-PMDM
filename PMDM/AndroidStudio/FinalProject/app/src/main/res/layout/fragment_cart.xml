@@ -51,7 +51,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="17dp"
             android:layout_marginTop="30dp"
-            android:text="(Long press to delete items)"
+            android:text="(Press to delete items)"
             android:textSize="10sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

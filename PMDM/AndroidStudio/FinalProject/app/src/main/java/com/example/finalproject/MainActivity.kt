@@ -1,7 +1,6 @@
 package com.example.finalproject
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
@@ -32,9 +31,10 @@ class MainActivity : AppCompatActivity() {
         val myExtra: Bundle? = intent.extras
         val myMessage: String? = myExtra?.getString("UserName")
 
-        with(binding){
+        with(binding) {
 //            usersName.text = myMessage
-            myNavigationView.getHeaderView(0).findViewById<TextView>(R.id.headerUsersName).text = "Welcome,\n"+myMessage+"!!"
+            myNavigationView.getHeaderView(0).findViewById<TextView>(R.id.headerUsersName).text =
+                "Welcome,\n" + myMessage + "!!"
 //            para que busque ese elemnto me tengo que meter en el header por este trozo de xml:
 //            app:headerLayout="@layout/header_menu"
 
@@ -43,9 +43,11 @@ class MainActivity : AppCompatActivity() {
             setSupportActionBar(myToolbar)
 
 //            Creacion del NavMenu
-            val toggle = ActionBarDrawerToggle(this@MainActivity, main, myToolbar,
+            val toggle = ActionBarDrawerToggle(
+                this@MainActivity, main, myToolbar,
                 R.string.navigation_drawer_open,
-                R.string.navigation_drawer_close)
+                R.string.navigation_drawer_close
+            )
             main.addDrawerListener(toggle)
             toggle.syncState()
 
@@ -65,12 +67,14 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
 
-                if(it.itemId == R.id.id_web){
-                    val myFragmentTransaction: FragmentTransaction = myFragmentManager.beginTransaction()
+                if (it.itemId == R.id.id_web) {
+                    val myFragmentTransaction: FragmentTransaction =
+                        myFragmentManager.beginTransaction()
 //                    val myFragment: WebFragment = WebFragment.newInstance("http://10.0.2.2:8080/contextpath/")
 //                    val myFragment: WebFragment = WebFragment.newInstance("http://192.168.1.189:8080/contextpath/")
-                    val myFragment: WebFragment = WebFragment.newInstance("http://192.168.1.46:8080/contextpath/")
-//                    val myFragment: WebFragment = WebFragment.newInstance("http://10.227.189.180:8080/contextpath/")
+//                    val myFragment: WebFragment = WebFragment.newInstance("http://192.168.1.46:8080/contextpath/")
+                    val myFragment: WebFragment =
+                        WebFragment.newInstance("http://10.227.189.204:8080/contextpath/")
                     layoutWelcome.visibility = View.GONE
 
                     myFragmentTransaction
@@ -78,8 +82,9 @@ class MainActivity : AppCompatActivity() {
                         .commit()
                 }
 
-                if(it.itemId == R.id.id_products){
-                    val myFragmentTransaction: FragmentTransaction = myFragmentManager.beginTransaction()
+                if (it.itemId == R.id.id_products) {
+                    val myFragmentTransaction: FragmentTransaction =
+                        myFragmentManager.beginTransaction()
                     val myFragment: ProductsFragment = ProductsFragment.newInstance()
 
                     layoutWelcome.visibility = View.GONE
@@ -89,8 +94,9 @@ class MainActivity : AppCompatActivity() {
                         .commit()
                 }
 
-                if(it.itemId == R.id.id_cart){
-                    val myFragmentTransaction: FragmentTransaction = myFragmentManager.beginTransaction()
+                if (it.itemId == R.id.id_cart) {
+                    val myFragmentTransaction: FragmentTransaction =
+                        myFragmentManager.beginTransaction()
                     val myFragment: CartFragment = CartFragment.newInstance()
 //                    val myFragment: ProductsFragment = ProductsFragment.newInstance()
 
@@ -105,9 +111,7 @@ class MainActivity : AppCompatActivity() {
             }
 
 
-
         }
-
 
 
     }

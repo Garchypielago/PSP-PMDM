@@ -8,12 +8,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.finalproject.CartFragment
 import com.example.finalproject.R
+import com.example.finalproject.entities.CartPokemon
 import com.example.finalproject.models.ResponseCart
+import com.example.finalproject.viewModels.CartViewModel
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
-class MyCartAdapter(private val dataSet: ResponseCart): RecyclerView.Adapter<MyCartView>() {
+class MyCartAdapter(private val dataSet: ResponseCart, val myCartViewModel: CartViewModel) :
+    RecyclerView.Adapter<MyCartView>() {
 
     private lateinit var myContext: Context
 
@@ -29,7 +37,7 @@ class MyCartAdapter(private val dataSet: ResponseCart): RecyclerView.Adapter<MyC
     override fun getItemCount() = dataSet.products.size
 
     override fun onBindViewHolder(holder: MyCartView, position: Int) {
-        if(position == clickPosition) {
+        if (position == clickPosition) {
             holder.constCart.setBackgroundColor(Color.parseColor("#FCC201"))
         } else {
             holder.constCart.setBackgroundColor(Color.TRANSPARENT)
@@ -47,23 +55,28 @@ class MyCartAdapter(private val dataSet: ResponseCart): RecyclerView.Adapter<MyC
         holder.cartTotal.text = "${product.totalPrice}P¥"
         holder.cartPrice.text = "${product.unitPrice}P¥"
 
-        holder.constCart.setOnClickListener{
+        holder.constCart.setOnClickListener {
             notifyItemChanged(clickPosition)
             clickPosition = position
             notifyItemChanged(clickPosition)
-            alert(it, product.pokemonName)
+            alert(it, product, myCartViewModel)
         }
-
     }
 
-    fun alert(v: View, name: String){
+    fun alert(v: View, pokemon: CartPokemon, myCartViewModel: CartViewModel) {
         var myAlert = AlertDialog.Builder(myContext)
         myAlert.setTitle("Delete item alert")
-        myAlert.setMessage("Are you sure you want to delete ${name}?")
-        myAlert.setPositiveButton("Yes, I am sure", DialogInterface.OnClickListener({ dialog, which ->
-//TODO borrado de elementos
-        }))
-        myAlert.setNegativeButton("Cancel"){ dialog, which ->
+        myAlert.setMessage("Are you sure you want to delete ${pokemon.pokemonName}?")
+        myAlert.setPositiveButton(
+            "Yes, I am sure",
+            DialogInterface.OnClickListener({ dialog, which ->
+                notifyItemChanged(clickPosition)
+                clickPosition = -1
+                notifyItemChanged(clickPosition)
+                myCartViewModel.deleteProductFromCart(pokemon.id.toLong())
+            })
+        )
+        myAlert.setNegativeButton("Cancel") { dialog, which ->
             notifyItemChanged(clickPosition)
             clickPosition = -1
             notifyItemChanged(clickPosition)

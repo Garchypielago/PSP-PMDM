@@ -14,23 +14,26 @@ class ProductsViewModel : ViewModel() {
     private val _data = MutableLiveData<ResponseShopedex>(ResponseShopedex())
     val data: LiveData<ResponseShopedex> get() = _data
 
-    fun returnAllProducts(){
-        viewModelScope.launch{
+    fun returnAllProducts() {
+        viewModelScope.launch {
             _data.value = myState.returnAllProducts()
         }
     }
-    fun returnTypeProducts(type: Long){
-        viewModelScope.launch{
+
+    fun returnTypeProducts(type: Long) {
+        viewModelScope.launch {
             _data.value = myState.returnTypeProducts(type)
         }
     }
-    fun returnRegionProducts(region: Long){
-        viewModelScope.launch{
+
+    fun returnRegionProducts(region: Long) {
+        viewModelScope.launch {
             _data.value = myState.returnRegionProducts(region)
         }
     }
-    fun returnTypeRegionProducts(type: Long, region: Long){
-        viewModelScope.launch{
+
+    fun returnTypeRegionProducts(type: Long, region: Long) {
+        viewModelScope.launch {
             _data.value = myState.returnTypeRegionProducts(type, region)
         }
     }

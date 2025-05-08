@@ -38,10 +38,12 @@ class MyProductAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         myContext = parent.context
         return if (viewType == TYPE_PRODUCT) {
-            val view = LayoutInflater.from(parent.context).inflate(R.layout.row_products, parent, false)
+            val view =
+                LayoutInflater.from(parent.context).inflate(R.layout.row_products, parent, false)
             MyProductView(view)
         } else {
-            val view = LayoutInflater.from(parent.context).inflate(R.layout.row_products_add, parent, false)
+            val view = LayoutInflater.from(parent.context)
+                .inflate(R.layout.row_products_add, parent, false)
             MyLastProductView(view)
         }
     }
@@ -74,12 +76,30 @@ class MyProductAdapter(
 
             if (type2 != null) {
                 holder.productType01.text = type1
-                holder.productType01.setBackgroundTintList(ColorStateList.valueOf(backgroundType(type1)))
+                holder.productType01.setBackgroundTintList(
+                    ColorStateList.valueOf(
+                        backgroundType(
+                            type1
+                        )
+                    )
+                )
                 holder.productType02.text = Types.entries[type2 - 1].toString()
-                holder.productType02.setBackgroundTintList(ColorStateList.valueOf(backgroundType(Types.entries[type2 - 1].toString())))
+                holder.productType02.setBackgroundTintList(
+                    ColorStateList.valueOf(
+                        backgroundType(
+                            Types.entries[type2 - 1].toString()
+                        )
+                    )
+                )
             } else {
                 holder.productType02.text = type1
-                holder.productType02.setBackgroundTintList(ColorStateList.valueOf(backgroundType(type1)))
+                holder.productType02.setBackgroundTintList(
+                    ColorStateList.valueOf(
+                        backgroundType(
+                            type1
+                        )
+                    )
+                )
                 holder.productType01.visibility = View.GONE
             }
 
@@ -90,7 +110,8 @@ class MyProductAdapter(
         }
 
         if (holder is MyLastProductView) {
-            holder.pokeShowed.text = "Page ${dataSet.pageable.pageNumber + 1} of ${dataSet.totalPages}."
+            holder.pokeShowed.text =
+                "Page ${dataSet.pageable.pageNumber + 1} of ${dataSet.totalPages}."
         }
     }
 
@@ -98,25 +119,25 @@ class MyProductAdapter(
         val typeStr = type.lowercase()
 
         return when (typeStr) {
-            "normal"   -> Color.parseColor("#AABB99")
-            "fire"     -> Color.parseColor("#FF4422")
-            "water"    -> Color.parseColor("#3399FF")
+            "normal" -> Color.parseColor("#AABB99")
+            "fire" -> Color.parseColor("#FF4422")
+            "water" -> Color.parseColor("#3399FF")
             "electric" -> Color.parseColor("#FFCC33")
-            "grass"    -> Color.parseColor("#77CC55")
-            "ice"      -> Color.parseColor("#66CCFF")
+            "grass" -> Color.parseColor("#77CC55")
+            "ice" -> Color.parseColor("#66CCFF")
             "fighting" -> Color.parseColor("#BB5544")
-            "poison"   -> Color.parseColor("#AA5599")
-            "ground"   -> Color.parseColor("#DDBB55")
-            "flying"   -> Color.parseColor("#8899FF")
-            "psychic"  -> Color.parseColor("#FF5599")
-            "bug"      -> Color.parseColor("#AABB22")
-            "rock"     -> Color.parseColor("#BBAA66")
-            "ghost"    -> Color.parseColor("#6666BB")
-            "dragon"   -> Color.parseColor("#7766EE")
-            "dark"     -> Color.parseColor("#775544")
-            "steel"    -> Color.parseColor("#AABBCC")
-            "fairy"    -> Color.parseColor("#EE99EE")
-            else       -> Color.TRANSPARENT
+            "poison" -> Color.parseColor("#AA5599")
+            "ground" -> Color.parseColor("#DDBB55")
+            "flying" -> Color.parseColor("#8899FF")
+            "psychic" -> Color.parseColor("#FF5599")
+            "bug" -> Color.parseColor("#AABB22")
+            "rock" -> Color.parseColor("#BBAA66")
+            "ghost" -> Color.parseColor("#6666BB")
+            "dragon" -> Color.parseColor("#7766EE")
+            "dark" -> Color.parseColor("#775544")
+            "steel" -> Color.parseColor("#AABBCC")
+            "fairy" -> Color.parseColor("#EE99EE")
+            else -> Color.TRANSPARENT
         }
     }
 

@@ -30,7 +30,7 @@ class LoginActivity : AppCompatActivity() {
 
         with(binding) {
 
-            loginBtn.setOnClickListener{
+            loginBtn.setOnClickListener {
                 val myIntent: Intent = Intent(this@LoginActivity, MainActivity::class.java)
                 val userName = loginEmail.text.toString().split("@")[0]
                 myIntent.putExtra("UserName", userName)

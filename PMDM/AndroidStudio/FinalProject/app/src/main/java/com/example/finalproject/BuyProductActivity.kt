@@ -1,23 +1,18 @@
 package com.example.finalproject
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.example.finalproject.databinding.ActivityBuyProductBinding
 import com.example.finalproject.viewModels.CartViewModel
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
 class BuyProductActivity : AppCompatActivity() {
     private lateinit var binding: ActivityBuyProductBinding
-    private lateinit var coroutine: Job
-
 
     private val myCartViewModel: CartViewModel by viewModels()
 
@@ -41,7 +36,7 @@ class BuyProductActivity : AppCompatActivity() {
         val productPrice = intent.getDoubleExtra("PRODUCT_PRICE", 0.0)
 
 
-        with(binding){
+        with(binding) {
 
             val url: String = productImg.toString()
             Glide.with(this@BuyProductActivity)
@@ -53,27 +48,26 @@ class BuyProductActivity : AppCompatActivity() {
             buyPrice.text = "${productPrice}P¥"
 
 
-            buyCloseBtn.setOnClickListener{
+            buyCloseBtn.setOnClickListener {
                 this@BuyProductActivity.finish()
             }
 
-            buyBtn.setOnClickListener{
+            buyBtn.setOnClickListener {
+                buyBtn.isEnabled = false
                 val quant = buyQuantity.text.toString().toLong()
 
-
-                coroutine = lifecycleScope.launch {
-                    addTocart(productId, quant)
-                    this@BuyProductActivity.finish()
-                }
-
+                myCartViewModel.addProductToCart(productId, quant)
             }
 
+            myCartViewModel.data2.observe(this@BuyProductActivity) {
+                if (!it.isNullOrBlank() ){
+                    Toast.makeText(this@BuyProductActivity, it, Toast.LENGTH_LONG).show()
+                    if(!it.contains("Error", ignoreCase = true)) {
+                        this@BuyProductActivity.finish()
+                    }
+                }
+            }
         }
 
-    }
-
-    private suspend fun addTocart(productId: Long, quant: Long){
-        myCartViewModel.addProductToCart(productId, quant)
-        delay(1000)
     }
 }

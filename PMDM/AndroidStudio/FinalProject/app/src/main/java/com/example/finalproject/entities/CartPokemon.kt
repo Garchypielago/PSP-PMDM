@@ -1,6 +1,6 @@
 package com.example.finalproject.entities
 
-data class CartPokemon (
+data class CartPokemon(
     val id: Int,
     val productNumber: Int,
     val pokemonId: Int,
