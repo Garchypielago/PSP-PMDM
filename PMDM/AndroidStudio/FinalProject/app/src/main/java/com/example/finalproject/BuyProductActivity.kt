@@ -66,6 +66,7 @@ class BuyProductActivity : AppCompatActivity() {
                         this@BuyProductActivity.finish()
                     }
                 }
+                buyBtn.isEnabled = true
             }
         }
 

@@ -78,5 +78,5 @@
         android:fitsSystemWindows="true"
         android:translationY="100dp"
         app:headerLayout="@layout/header_menu"
-        app:menu="@menu/mi_menu" />
+        app:menu="@menu/mi_nav_menu" />
 </androidx.drawerlayout.widget.DrawerLayout>

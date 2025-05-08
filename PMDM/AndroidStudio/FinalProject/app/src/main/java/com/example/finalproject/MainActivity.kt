@@ -1,6 +1,8 @@
 package com.example.finalproject
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
@@ -116,4 +118,15 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.mi_log_menu, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if(item.itemId == R.id.logoutIcon){
+            this.finish()
+        }
+        return super.onOptionsItemSelected(item)
+    }
 }

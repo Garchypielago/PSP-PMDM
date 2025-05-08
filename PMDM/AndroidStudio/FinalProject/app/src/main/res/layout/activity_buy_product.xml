@@ -93,6 +93,7 @@
         android:autofillHints=""
         android:ems="10"
         android:inputType="number"
+        android:text="1"
         android:textAlignment="viewEnd"
         android:textColor="#000000"
         android:textIsSelectable="false"
