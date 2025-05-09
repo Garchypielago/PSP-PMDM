@@ -38,6 +38,8 @@ class ProductsFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     private var firstLoad = true
 
+    private val fullProductList = mutableListOf<Pokemon>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -51,7 +53,7 @@ class ProductsFragment : Fragment(), AdapterView.OnItemSelectedListener {
         val myView = binding.root
 
         // Inicializamos el adaptador con una lista vacía y el listener para los clicks
-        myAdapter = MyProductAdapter(ResponseShopedex()) { product ->
+        myAdapter = MyProductAdapter(ResponseShopedex(), type, region, myProductsViewModel) { product ->
             // Implementación del listener para cuando se hace click en un producto
             val myIntent = Intent(requireContext(), BuyProductActivity::class.java).apply {
                 putExtra("PRODUCT_ID", product.id)
@@ -112,23 +114,39 @@ class ProductsFragment : Fragment(), AdapterView.OnItemSelectedListener {
                     return@observe
                 }
 
-                myAdapter = MyProductAdapter(response) { product ->
+                if (response.pageable.pageNumber == 0) {
+                    // Reiniciar la lista
+                    fullProductList.clear()
+                    fullProductList.addAll(response.content)
+                } else {
+                    // Acumular nuevas páginas
+                    fullProductList.addAll(response.content)
+                }
 
-                    val myIntent =
-                        Intent(requireContext(), BuyProductActivity::class.java).apply {
-                            putExtra("PRODUCT_ID", product.id)
-                            putExtra("PRODUCT_NAME", product.name)
-                            putExtra("PRODUCT_IMG", product.url)
-                            putExtra("PRODUCT_STOCK", product.stock)
-                            putExtra("PRODUCT_PRICE", product.price)
-                        }
+                // Crear una copia coherente de ResponseShopedex con todos los productos acumulados
+                val accumulatedResponse = response.copy(
+                    content = fullProductList.toList(),
+                    numberOfElements = fullProductList.size,
+                )
+
+                val lastVisibleItemPosition = layoutManager.findLastVisibleItemPosition()
+
+                myAdapter = MyProductAdapter(accumulatedResponse, type, region, myProductsViewModel) { product ->
+                    val myIntent = Intent(requireContext(), BuyProductActivity::class.java).apply {
+                        putExtra("PRODUCT_ID", product.id)
+                        putExtra("PRODUCT_NAME", product.name)
+                        putExtra("PRODUCT_IMG", product.url)
+                        putExtra("PRODUCT_STOCK", product.stock)
+                        putExtra("PRODUCT_PRICE", product.price)
+                    }
                     startActivity(myIntent)
                 }
                 productRecyclerView.adapter = myAdapter
 
+                productRecyclerView.scrollToPosition(lastVisibleItemPosition)
+
                 if (response.empty) {
-                    Toast.makeText(requireContext(), "Did not find any Pokemon", Toast.LENGTH_SHORT)
-                        .show()
+                    Toast.makeText(requireContext(), "Did not find any Pokemon", Toast.LENGTH_SHORT).show()
                 }
             }
         }

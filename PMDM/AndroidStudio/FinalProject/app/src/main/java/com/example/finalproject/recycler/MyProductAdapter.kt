@@ -13,9 +13,13 @@ import com.example.finalproject.entities.Pokemon
 import com.example.finalproject.enums.Regions
 import com.example.finalproject.enums.Types
 import com.example.finalproject.models.ResponseShopedex
+import com.example.finalproject.viewModels.ProductsViewModel
 
 class MyProductAdapter(
     private val dataSet: ResponseShopedex,
+    private val type: Int,
+    private val region: Int,
+    private val myProductsViewModel: ProductsViewModel,
     private val onProductClick: (product: Pokemon) -> Unit  // sol internet
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {  // Cambiado: RecyclerView.ViewHolder para soportar múltiples tipos de vista
 
@@ -112,6 +116,21 @@ class MyProductAdapter(
         if (holder is MyLastProductView) {
             holder.pokeShowed.text =
                 "Page ${dataSet.pageable.pageNumber + 1} of ${dataSet.totalPages}."
+
+            holder.btnShowMore.setOnClickListener {
+                val nextPage = (dataSet.pageable.pageNumber + 2).toLong()
+
+                when {
+                    type == 0 && region == 0 -> myProductsViewModel.returnAllProducts(nextPage)
+                    type != 0 && region == 0 -> myProductsViewModel.returnTypeProducts(type.toLong(), nextPage)
+                    type == 0 && region != 0 -> myProductsViewModel.returnRegionProducts(region.toLong(), nextPage)
+                    else -> myProductsViewModel.returnTypeRegionProducts(
+                        type.toLong(),
+                        region.toLong(),
+                        nextPage
+                    )
+                }
+            }
         }
     }
 

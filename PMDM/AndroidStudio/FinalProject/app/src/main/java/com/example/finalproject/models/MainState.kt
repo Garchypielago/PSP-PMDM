@@ -1,6 +1,5 @@
 package com.example.finalproject.models
 
-import android.util.Log
 import retrofit2.HttpException
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -12,7 +11,7 @@ class MainState {
     var baseUrl = "http://10.227.189.204:8080/contextpath/api/app/v1/"
 
 
-    suspend fun returnAllProducts(): ResponseShopedex {
+    suspend fun returnAllProducts(nextPage: Long = 1): ResponseShopedex {
         val retrofit = Retrofit.Builder()
             .baseUrl(baseUrl)
             .addConverterFactory(GsonConverterFactory.create())
@@ -20,10 +19,10 @@ class MainState {
 
         val service = retrofit.create(ShopedexAPIService::class.java)
 
-        return service.getAllProducts().body() ?: ResponseShopedex()
+        return service.getAllProducts(nextPage).body() ?: ResponseShopedex()
     }
 
-    suspend fun returnTypeProducts(type: Long): ResponseShopedex {
+    suspend fun returnTypeProducts(type: Long, nextPage: Long = 1): ResponseShopedex {
         val retrofit = Retrofit.Builder()
             .baseUrl(baseUrl)
             .addConverterFactory(GsonConverterFactory.create())
@@ -31,10 +30,10 @@ class MainState {
 
         val service = retrofit.create(ShopedexAPIService::class.java)
 
-        return service.getTypeProducts(type).body() ?: ResponseShopedex()
+        return service.getTypeProducts(type, nextPage).body() ?: ResponseShopedex()
     }
 
-    suspend fun returnRegionProducts(region: Long): ResponseShopedex {
+    suspend fun returnRegionProducts(region: Long, nextPage: Long = 1): ResponseShopedex {
         val retrofit = Retrofit.Builder()
             .baseUrl(baseUrl)
             .addConverterFactory(GsonConverterFactory.create())
@@ -42,10 +41,10 @@ class MainState {
 
         val service = retrofit.create(ShopedexAPIService::class.java)
 
-        return service.getRegionProducts(region).body() ?: ResponseShopedex()
+        return service.getRegionProducts(region, nextPage).body() ?: ResponseShopedex()
     }
 
-    suspend fun returnTypeRegionProducts(type: Long, region: Long): ResponseShopedex {
+    suspend fun returnTypeRegionProducts(type: Long, region: Long, nextPage: Long = 1): ResponseShopedex {
         val retrofit = Retrofit.Builder()
             .baseUrl(baseUrl)
             .addConverterFactory(GsonConverterFactory.create())
@@ -53,7 +52,7 @@ class MainState {
 
         val service = retrofit.create(ShopedexAPIService::class.java)
 
-        return service.getTypeRegionProducts(type, region).body() ?: ResponseShopedex()
+        return service.getTypeRegionProducts(type, region, nextPage).body() ?: ResponseShopedex()
     }
 
     suspend fun returnCart(): ResponseCart {

@@ -10,18 +10,19 @@ import retrofit2.http.Query
 interface ShopedexAPIService {
 
     @GET("products/find")
-    suspend fun getAllProducts(): Response<ResponseShopedex>
+    suspend fun getAllProducts(@Query("pageNumber") pageNumber: Long = 1): Response<ResponseShopedex>
 
     @GET("products/find")
-    suspend fun getTypeProducts(@Query("type") type: Long): Response<ResponseShopedex>
+    suspend fun getTypeProducts(@Query("type") type: Long, @Query("pageNumber") pageNumber: Long = 1): Response<ResponseShopedex>
 
     @GET("products/find")
-    suspend fun getRegionProducts(@Query("region") region: Long): Response<ResponseShopedex>
+    suspend fun getRegionProducts(@Query("region") region: Long, @Query("pageNumber") pageNumber: Long = 1): Response<ResponseShopedex>
 
     @GET("products/find")
     suspend fun getTypeRegionProducts(
         @Query("type") type: Long,
-        @Query("region") region: Long
+        @Query("region") region: Long,
+        @Query("pageNumber") pageNumber: Long = 1
     ): Response<ResponseShopedex>
 
 
