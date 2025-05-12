@@ -13,6 +13,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.example.finalproject.databinding.ActivityMainBinding
+import com.example.finalproject.utils.constants
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -30,13 +31,13 @@ class MainActivity : AppCompatActivity() {
         }
 
 // Intents paso de variables entre actividades
-        val myExtra: Bundle? = intent.extras
-        val myMessage: String? = myExtra?.getString("UserName")
+//        val myExtra: Bundle? = intent.extras
+//        val myMessage: String? = myExtra?.getString("UserName")
 
         with(binding) {
 //            usersName.text = myMessage
             myNavigationView.getHeaderView(0).findViewById<TextView>(R.id.headerUsersName).text =
-                "Welcome,\n" + myMessage + "!!"
+                "Welcome,\n${constants.USERNAME}!!"
 //            para que busque ese elemnto me tengo que meter en el header por este trozo de xml:
 //            app:headerLayout="@layout/header_menu"
 
@@ -52,7 +53,6 @@ class MainActivity : AppCompatActivity() {
             )
             main.addDrawerListener(toggle)
             toggle.syncState()
-
 
 //            Seteo del NavMenu
             myNavigationView.setNavigationItemSelectedListener {
@@ -72,11 +72,8 @@ class MainActivity : AppCompatActivity() {
                 if (it.itemId == R.id.id_web) {
                     val myFragmentTransaction: FragmentTransaction =
                         myFragmentManager.beginTransaction()
-//                    val myFragment: WebFragment = WebFragment.newInstance("http://10.0.2.2:8080/contextpath/")
-//                    val myFragment: WebFragment = WebFragment.newInstance("http://192.168.1.189:8080/contextpath/")
-//                    val myFragment: WebFragment = WebFragment.newInstance("http://192.168.1.46:8080/contextpath/")
                     val myFragment: WebFragment =
-                        WebFragment.newInstance("http://10.227.189.204:8080/contextpath/")
+                        WebFragment.newInstance(constants.BASE_URL)
                     layoutWelcome.visibility = View.GONE
 
                     myFragmentTransaction
@@ -100,7 +97,6 @@ class MainActivity : AppCompatActivity() {
                     val myFragmentTransaction: FragmentTransaction =
                         myFragmentManager.beginTransaction()
                     val myFragment: CartFragment = CartFragment.newInstance()
-//                    val myFragment: ProductsFragment = ProductsFragment.newInstance()
 
                     layoutWelcome.visibility = View.GONE
 
@@ -111,11 +107,7 @@ class MainActivity : AppCompatActivity() {
 
                 true
             }
-
-
         }
-
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

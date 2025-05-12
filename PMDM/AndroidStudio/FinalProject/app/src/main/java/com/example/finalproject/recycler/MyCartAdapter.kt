@@ -81,6 +81,8 @@ class MyCartAdapter(private val dataSet: ResponseCart, val myCartViewModel: Cart
             clickPosition = -1
             notifyItemChanged(clickPosition)
         }
-        myAlert.create().show()
+        val dialog = myAlert.create()
+        dialog.setCanceledOnTouchOutside(false)
+        dialog.show()
     }
 }
