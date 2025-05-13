@@ -21,6 +21,7 @@
         android:layout_height="wrap_content"
         android:text="Welcome, user!"
         android:textAlignment="textStart"
+        android:textColor="#000000"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"

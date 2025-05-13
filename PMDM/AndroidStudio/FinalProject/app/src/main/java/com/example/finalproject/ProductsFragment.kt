@@ -53,17 +53,18 @@ class ProductsFragment : Fragment(), AdapterView.OnItemSelectedListener {
         val myView = binding.root
 
         // Inicializamos el adaptador con una lista vacía y el listener para los clicks
-        myAdapter = MyProductAdapter(ResponseShopedex(), type, region, myProductsViewModel) { product ->
-            // Implementación del listener para cuando se hace click en un producto
-            val myIntent = Intent(requireContext(), BuyProductActivity::class.java).apply {
-                putExtra("PRODUCT_ID", product.id)
-                putExtra("PRODUCT_NAME", product.name)
-                putExtra("PRODUCT_IMG", product.url)
-                putExtra("PRODUCT_STOCK", product.stock)
-                putExtra("PRODUCT_PRICE", product.price)
+        myAdapter =
+            MyProductAdapter(ResponseShopedex(), type, region, myProductsViewModel) { product ->
+                // Implementación del listener para cuando se hace click en un producto
+                val myIntent = Intent(requireContext(), BuyProductActivity::class.java).apply {
+                    putExtra("PRODUCT_ID", product.id)
+                    putExtra("PRODUCT_NAME", product.name)
+                    putExtra("PRODUCT_IMG", product.url)
+                    putExtra("PRODUCT_STOCK", product.stock)
+                    putExtra("PRODUCT_PRICE", product.price)
+                }
+                startActivity(myIntent)
             }
-            startActivity(myIntent)
-        }
         binding.productRecyclerView.adapter = myAdapter
 
         with(binding) {
@@ -96,17 +97,17 @@ class ProductsFragment : Fragment(), AdapterView.OnItemSelectedListener {
             myProductsViewModel.returnAllProducts()
 
             // Listener para el botón de filtrado
-            productFilterBtn.setOnClickListener {
-                when {
-                    type == 0 && region == 0 -> myProductsViewModel.returnAllProducts()
-                    type != 0 && region == 0 -> myProductsViewModel.returnTypeProducts(type.toLong())
-                    type == 0 && region != 0 -> myProductsViewModel.returnRegionProducts(region.toLong())
-                    else -> myProductsViewModel.returnTypeRegionProducts(
-                        type.toLong(),
-                        region.toLong()
-                    )
-                }
-            }
+//            productFilterBtn.setOnClickListener {
+//                when {
+//                    type == 0 && region == 0 -> myProductsViewModel.returnAllProducts()
+//                    type != 0 && region == 0 -> myProductsViewModel.returnTypeProducts(type.toLong())
+//                    type == 0 && region != 0 -> myProductsViewModel.returnRegionProducts(region.toLong())
+//                    else -> myProductsViewModel.returnTypeRegionProducts(
+//                        type.toLong(),
+//                        region.toLong()
+//                    )
+//                }
+//            }
 
             myProductsViewModel.data.observe(viewLifecycleOwner) { response ->
                 if (firstLoad) {
@@ -131,7 +132,12 @@ class ProductsFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
                 val lastVisibleItemPosition = layoutManager.findLastVisibleItemPosition()
 
-                myAdapter = MyProductAdapter(accumulatedResponse, type, region, myProductsViewModel) { product ->
+                myAdapter = MyProductAdapter(
+                    accumulatedResponse,
+                    type,
+                    region,
+                    myProductsViewModel
+                ) { product ->
                     val myIntent = Intent(requireContext(), BuyProductActivity::class.java).apply {
                         putExtra("PRODUCT_ID", product.id)
                         putExtra("PRODUCT_NAME", product.name)
@@ -146,7 +152,8 @@ class ProductsFragment : Fragment(), AdapterView.OnItemSelectedListener {
                 productRecyclerView.scrollToPosition(lastVisibleItemPosition)
 
                 if (response.empty) {
-                    Toast.makeText(requireContext(), "Did not find any Pokemon", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Did not find any Pokemon", Toast.LENGTH_SHORT)
+                        .show()
                 }
             }
         }
@@ -192,6 +199,16 @@ class ProductsFragment : Fragment(), AdapterView.OnItemSelectedListener {
                 "PALDEA" -> region = 9
                 else -> region = 0
             }
+        }
+
+        when {
+            type == 0 && region == 0 -> myProductsViewModel.returnAllProducts()
+            type != 0 && region == 0 -> myProductsViewModel.returnTypeProducts(type.toLong())
+            type == 0 && region != 0 -> myProductsViewModel.returnRegionProducts(region.toLong())
+            else -> myProductsViewModel.returnTypeRegionProducts(
+                type.toLong(),
+                region.toLong()
+            )
         }
 
     }

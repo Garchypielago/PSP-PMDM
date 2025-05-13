@@ -1,7 +1,7 @@
 package com.example.finalproject.utils
 
 object constants {
-//    const val IP_ADDRESS = "10.227.189.204"
+    //    const val IP_ADDRESS = "10.227.189.204"
 //    const val IP_ADDRESS = "192.168.1.46"
     const val IP_ADDRESS = "10.227.189.197"
 //    const val IP_ADDRESS = "192.168.1.150"

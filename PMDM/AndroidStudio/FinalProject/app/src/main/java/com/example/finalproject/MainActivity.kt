@@ -116,7 +116,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if(item.itemId == R.id.logoutIcon){
+        if (item.itemId == R.id.logoutIcon) {
             this.finish()
         }
         return super.onOptionsItemSelected(item)

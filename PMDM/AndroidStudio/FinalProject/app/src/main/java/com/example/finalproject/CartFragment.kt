@@ -59,7 +59,8 @@ class CartFragment : Fragment() {
 
                 if (response.products.isEmpty()) {
                     pokeCartTotal.text = "0P¥"
-                    Toast.makeText(requireContext(), "Did not find any Pokemon", Toast.LENGTH_LONG).show()
+                    Toast.makeText(requireContext(), "Did not find any Pokemon", Toast.LENGTH_LONG)
+                        .show()
                     return@observe
                 }
 
@@ -70,7 +71,7 @@ class CartFragment : Fragment() {
             }
 
             myCartViewModel.data2.observe(viewLifecycleOwner) {
-                if (!it.isNullOrBlank() ){
+                if (!it.isNullOrBlank()) {
                     Toast.makeText(requireContext(), it, Toast.LENGTH_LONG).show()
                 }
             }

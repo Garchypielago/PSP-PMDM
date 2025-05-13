@@ -1,7 +1,6 @@
 package com.example.finalproject.models
 
 import com.example.finalproject.entities.UserDTO
-import com.example.finalproject.utils.constants
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.DELETE

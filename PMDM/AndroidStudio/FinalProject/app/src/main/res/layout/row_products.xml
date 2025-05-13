@@ -9,7 +9,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        app:cardBackgroundColor="#00FFFFFF">
+        android:visibility="visible"
+        app:cardBackgroundColor="@android:color/transparent"
+        app:cardCornerRadius="0dp"
+        app:cardElevation="0dp"
+        app:cardPreventCornerOverlap="false">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -19,7 +23,7 @@
                 android:id="@+id/imageView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:scaleX="1.15"
+                android:scaleX="1.08"
                 android:scaleY="1.025"
                 android:translationY="4dp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -60,6 +64,7 @@
                 android:layout_marginEnd="50dp"
                 android:text="pokeName"
                 android:textAlignment="viewEnd"
+                android:textColor="#000000"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -73,6 +78,7 @@
                 android:layout_marginEnd="50dp"
                 android:text="pokePrice"
                 android:textAlignment="viewEnd"
+                android:textColor="#000000"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/pokeId" />
@@ -85,6 +91,7 @@
                 android:layout_marginEnd="50dp"
                 android:text="pokeStock"
                 android:textAlignment="viewEnd"
+                android:textColor="#000000"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/pokeId" />
@@ -97,6 +104,7 @@
                 android:layout_marginTop="15dp"
                 android:layout_marginEnd="55dp"
                 android:text="pokeDes"
+                android:textColor="#000000"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -108,7 +116,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="157dp"
                 android:layout_marginEnd="157dp"
-                android:layout_marginBottom="125dp"
+                android:layout_marginBottom="150dp"
                 android:text="Add to cart"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -123,6 +131,7 @@
                 android:layout_marginTop="224dp"
                 android:text="N.º0000"
                 android:textAllCaps="false"
+                android:textColor="#000000"
                 android:textSize="16sp"
                 android:typeface="normal"
                 app:layout_constraintStart_toStartOf="parent"
@@ -133,8 +142,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="25dp"
-                android:layout_marginTop="170dp"
+                android:layout_marginTop="190dp"
                 android:text="pokeRegion"
+                android:textColor="#000000"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -147,6 +157,7 @@
                 android:layout_marginEnd="200dp"
                 android:text="Price"
                 android:textAlignment="viewEnd"
+                android:textColor="#000000"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/pokeId" />
 
@@ -158,6 +169,7 @@
                 android:layout_marginEnd="200dp"
                 android:text="Stock"
                 android:textAlignment="viewEnd"
+                android:textColor="#000000"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/pokeId" />
 
@@ -169,6 +181,7 @@
                 android:layout_marginEnd="200dp"
                 android:text="Type"
                 android:textAlignment="viewEnd"
+                android:textColor="#000000"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/pokeId" />
 

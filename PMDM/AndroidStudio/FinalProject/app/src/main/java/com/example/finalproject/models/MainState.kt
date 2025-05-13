@@ -1,6 +1,5 @@
 package com.example.finalproject.models
 
-import android.util.Log
 import com.example.finalproject.entities.UserDTO
 import com.example.finalproject.utils.constants
 import retrofit2.HttpException
@@ -61,7 +60,8 @@ class MainState {
 
         val service = retrofit.create(ShopedexAPIService::class.java)
 
-        return service.getTypeProducts(constants.ACCESS_TOKEN, type, nextPage).body() ?: ResponseShopedex()
+        return service.getTypeProducts(constants.ACCESS_TOKEN, type, nextPage).body()
+            ?: ResponseShopedex()
     }
 
     suspend fun returnRegionProducts(region: Long, nextPage: Long = 1): ResponseShopedex {
@@ -72,10 +72,15 @@ class MainState {
 
         val service = retrofit.create(ShopedexAPIService::class.java)
 
-        return service.getRegionProducts(constants.ACCESS_TOKEN, region, nextPage).body() ?: ResponseShopedex()
+        return service.getRegionProducts(constants.ACCESS_TOKEN, region, nextPage).body()
+            ?: ResponseShopedex()
     }
 
-    suspend fun returnTypeRegionProducts(type: Long, region: Long, nextPage: Long = 1): ResponseShopedex {
+    suspend fun returnTypeRegionProducts(
+        type: Long,
+        region: Long,
+        nextPage: Long = 1
+    ): ResponseShopedex {
         val retrofit = Retrofit.Builder()
             .baseUrl(baseUrl)
             .addConverterFactory(GsonConverterFactory.create())
@@ -83,7 +88,8 @@ class MainState {
 
         val service = retrofit.create(ShopedexAPIService::class.java)
 
-        return service.getTypeRegionProducts(constants.ACCESS_TOKEN, type, region, nextPage).body() ?: ResponseShopedex()
+        return service.getTypeRegionProducts(constants.ACCESS_TOKEN, type, region, nextPage).body()
+            ?: ResponseShopedex()
     }
 
     suspend fun returnCart(): ResponseCart {
@@ -97,7 +103,7 @@ class MainState {
         return service.getCart(constants.ACCESS_TOKEN).body() ?: ResponseCart()
     }
 
-    suspend fun addProductToCart(productId: Long, count: Long): String  {
+    suspend fun addProductToCart(productId: Long, count: Long): String {
         val retrofit = Retrofit.Builder()
             .baseUrl(baseUrl)
             .addConverterFactory(GsonConverterFactory.create())
@@ -113,7 +119,7 @@ class MainState {
                 "Error ${response.code()}: ${response.errorBody()?.string()}"
             }
         } catch (e: HttpException) {
-                "HTTP Error ${e.code()}: ${e.message()}"
+            "HTTP Error ${e.code()}: ${e.message()}"
         } catch (e: Exception) {
             "General Error: ${e.localizedMessage}"
         }

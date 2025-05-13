@@ -2,7 +2,6 @@ package com.example.finalproject
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
@@ -17,6 +16,8 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
 
     private val myLoginViewModel: LoginViewModel by viewModels()
+
+    private var firstLoad = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,25 +35,32 @@ class LoginActivity : AppCompatActivity() {
 
         with(binding) {
 
+            firstLoad = true
+
             loginBtn.setOnClickListener {
                 myLoginViewModel.login(loginEmail.text.toString(), loginPass.text.toString())
             }
 
             myLoginViewModel.data.observe(this@LoginActivity) { response ->
-                    val access = response.accessToken.trim()
-                    val refresh = response.refreshToken.trim()
-
-                    if (access.isNotEmpty() && refresh.isNotEmpty()) {
-                        constants.ACCESS_TOKEN = "Bearer $access"
-                        constants.REFRESH_TOKEN = "Bearer $refresh"
-                        constants.USERNAME = loginEmail.text.toString().split("@")[0]
-
-                        startActivity(Intent(this@LoginActivity, MainActivity::class.java))
-                    } else {
-                        Toast.makeText(this@LoginActivity, "Access unauthorized", Toast.LENGTH_SHORT).show()
-
-                    }
+                if (firstLoad) {
+                    firstLoad = false
+                    return@observe
                 }
+                val access = response.accessToken.trim()
+                val refresh = response.refreshToken.trim()
+
+                if (access.isNotEmpty() && refresh.isNotEmpty()) {
+                    constants.ACCESS_TOKEN = "Bearer $access"
+                    constants.REFRESH_TOKEN = "Bearer $refresh"
+                    constants.USERNAME = loginEmail.text.toString().split("@")[0]
+
+                    startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+                } else {
+                    Toast.makeText(this@LoginActivity, "Access unauthorized", Toast.LENGTH_SHORT)
+                        .show()
+
+                }
+            }
 
         }
     }

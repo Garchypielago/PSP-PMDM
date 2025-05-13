@@ -122,8 +122,16 @@ class MyProductAdapter(
 
                 when {
                     type == 0 && region == 0 -> myProductsViewModel.returnAllProducts(nextPage)
-                    type != 0 && region == 0 -> myProductsViewModel.returnTypeProducts(type.toLong(), nextPage)
-                    type == 0 && region != 0 -> myProductsViewModel.returnRegionProducts(region.toLong(), nextPage)
+                    type != 0 && region == 0 -> myProductsViewModel.returnTypeProducts(
+                        type.toLong(),
+                        nextPage
+                    )
+
+                    type == 0 && region != 0 -> myProductsViewModel.returnRegionProducts(
+                        region.toLong(),
+                        nextPage
+                    )
+
                     else -> myProductsViewModel.returnTypeRegionProducts(
                         type.toLong(),
                         region.toLong(),

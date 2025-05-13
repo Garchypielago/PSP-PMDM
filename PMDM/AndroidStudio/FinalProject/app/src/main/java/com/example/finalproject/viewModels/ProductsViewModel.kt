@@ -22,19 +22,19 @@ class ProductsViewModel : ViewModel() {
 
     fun returnTypeProducts(type: Long, nextPage: Long = 1) {
         viewModelScope.launch {
-            _data.value = myState.returnTypeProducts(type,nextPage)
+            _data.value = myState.returnTypeProducts(type, nextPage)
         }
     }
 
     fun returnRegionProducts(region: Long, nextPage: Long = 1) {
         viewModelScope.launch {
-            _data.value = myState.returnRegionProducts(region,nextPage)
+            _data.value = myState.returnRegionProducts(region, nextPage)
         }
     }
 
     fun returnTypeRegionProducts(type: Long, region: Long, nextPage: Long = 1) {
         viewModelScope.launch {
-            _data.value = myState.returnTypeRegionProducts(type, region,nextPage)
+            _data.value = myState.returnTypeRegionProducts(type, region, nextPage)
         }
     }
 

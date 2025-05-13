@@ -3,22 +3,16 @@ package com.example.finalproject.recycler
 import android.content.Context
 import android.content.DialogInterface
 import android.graphics.Color
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.finalproject.CartFragment
 import com.example.finalproject.R
 import com.example.finalproject.entities.CartPokemon
 import com.example.finalproject.models.ResponseCart
 import com.example.finalproject.viewModels.CartViewModel
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
 class MyCartAdapter(private val dataSet: ResponseCart, val myCartViewModel: CartViewModel) :
     RecyclerView.Adapter<MyCartView>() {

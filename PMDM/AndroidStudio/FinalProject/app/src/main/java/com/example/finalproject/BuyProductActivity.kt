@@ -60,9 +60,9 @@ class BuyProductActivity : AppCompatActivity() {
             }
 
             myCartViewModel.data2.observe(this@BuyProductActivity) {
-                if (!it.isNullOrBlank() ){
+                if (!it.isNullOrBlank()) {
                     Toast.makeText(this@BuyProductActivity, it, Toast.LENGTH_LONG).show()
-                    if(!it.contains("Error", ignoreCase = true)) {
+                    if (!it.contains("Error", ignoreCase = true)) {
                         this@BuyProductActivity.finish()
                     }
                 }
